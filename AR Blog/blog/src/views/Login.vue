@@ -10,9 +10,9 @@
         size="normal"
         key="login"
       >
-        <el-form-item prop="name">
+        <el-form-item prop="username">
           <el-input
-            v-model="loginForm.name"
+            v-model="loginForm.username"
             placeholder="Please input username"
           ></el-input>
         </el-form-item>
@@ -105,11 +105,11 @@ export default {
       loading: false,
       status: 1,
       loginForm: {
-        name: "",
+        username: "",
         password: "",
       },
       loginRules: {
-        name: [
+        username: [
           { required: true, message: "Please input username", trigger: "blur" },
         ],
         password: [
@@ -139,10 +139,15 @@ export default {
       this.$refs["loginForm"].validate((valid) => {
         if (valid) {
           this.loading = true;
+          this.$axios.post("http://127.0.0.1:3000/api/user/login", this.loginForm )
+          .then(res => {
+            console.log(res);
+            
+          })
           setTimeout(() => {
             this.loading = false;
-            this.$store.commit("changeIsSignIn", 1);
-            this.$router.push({ name: "home" });
+            // this.$store.commit("changeIsSignIn", 1);
+            // this.$router.push({ name: "home" });
           }, 1500);
         } else {
           console.log("error submit!");
