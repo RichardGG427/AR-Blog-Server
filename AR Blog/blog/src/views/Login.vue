@@ -139,7 +139,7 @@ export default {
       this.$refs["loginForm"].validate((valid) => {
         if (valid) {
           this.loading = true;
-          this.$axios.post("http://127.0.0.1:3000/api/user/login", this.loginForm )
+          this.$axios.post("/api/user/login", this.loginForm )
           .then(res => {
             console.log(res);
             
@@ -159,7 +159,7 @@ export default {
       this.$refs["regForm"].validate((valid) => {
         if (valid) {
           this.$axios
-            .post("http://127.0.0.1:3000/api/user/register", this.regForm)
+            .post("/api/user/register", this.regForm)
             .then((res) => {
               console.log(res);
             });
